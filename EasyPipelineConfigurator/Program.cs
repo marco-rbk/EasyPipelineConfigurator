@@ -10,14 +10,15 @@ var serviceCollection = new ServiceCollection();
 // Register Services
 serviceCollection.AddTransient<IInputProvider, ConsoleInputProvider>();
 serviceCollection.AddTransient<ITemplateService, JsonTemplateService>();
-serviceCollection.AddTransient<IPipelineGenerator, GitHubPipelineGenerator>(); // Currently only supporting GitHub for simplicity of V1
+serviceCollection.AddTransient<IPipelineGenerator, GitHubPipelineGenerator>();
+serviceCollection.AddTransient<IPipelineGenerator, GitLabPipelineGenerator>();
 serviceCollection.AddTransient<IFileWriteService, LocalFileWriteService>();
 
 var serviceProvider = serviceCollection.BuildServiceProvider();
 
 // Application Logic
 var input = serviceProvider.GetRequiredService<IInputProvider>();
-var generator = serviceProvider.GetRequiredService<IPipelineGenerator>();
+var generators = serviceProvider.GetServices<IPipelineGenerator>();
 var fileService = serviceProvider.GetRequiredService<IFileWriteService>();
 
 Console.WriteLine("Welcome to EasyPipelineConfigurator!");
@@ -33,8 +34,16 @@ var config = new PipelineConfig
     OutputDirectory = input.GetOutputDirectory()
 };
 
+var generator = generators.FirstOrDefault(g => g.Type == config.TargetPlatform);
+if (generator == null)
+{
+    Console.WriteLine($"Error: No generator found for platform {config.TargetPlatform}");
+    return;
+}
+
 var pipelineContent = generator.Generate(config);
-var outputPath = Path.Combine(config.OutputDirectory, "pipeline.yml"); // Simplification for file name
+var fileName = config.TargetPlatform == EasyPipelineConfigurator.Core.Enums.PlatformType.GitHub ? "pipeline.yml" : ".gitlab-ci.yml";
+var outputPath = Path.Combine(config.OutputDirectory, fileName);
 
 await fileService.WriteFileAsync(outputPath, pipelineContent);
 
