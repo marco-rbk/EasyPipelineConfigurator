@@ -1,0 +1,10 @@
+{
+  "Steps": {
+    "Restore": "dotnet restore",
+    "Build": "dotnet build --no-restore",
+    "Test": "dotnet test --no-build --verbosity normal",
+    "Release": "dotnet publish -c Release -o release_output",
+    "Pack": "dotnet pack -c Release -o nuget_packages",
+    "Push": "dotnet nuget push \"nuget_packages/*.nupkg\" --source \"https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json\" --api-key ${{ secrets.GITHUB_TOKEN }}"
+  }
+}

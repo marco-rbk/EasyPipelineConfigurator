@@ -1,6 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <None Update="Templates\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+    <ItemGroup>
     <ProjectReference Include="..\EasyPipelineConfigurator.Core\EasyPipelineConfigurator.Core.csproj" />
   </ItemGroup>
 

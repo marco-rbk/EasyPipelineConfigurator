@@ -1,0 +1,10 @@
+{
+    "Steps": {
+        "Restore": "pip install -r requirements.txt",
+        "Build": "python -m build",
+        "Test": "pytest",
+        "Release": "echo 'Release step for Python'",
+        "Pack": "python -m build",
+        "Push": "twine upload dist/*"
+    }
+}

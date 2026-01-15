@@ -10,7 +10,28 @@ public class ConsoleInputProvider : IInputProvider
         Console.WriteLine("Select Platform:");
         Console.WriteLine("1. GitHub");
         Console.WriteLine("2. GitLab");
-        Console.WriteLine("3. Azure DevOps");
+
+        while (true)
+        {
+            Console.Write("Choice (1-2): ");
+            var key = Console.ReadLine();
+            switch (key)
+            {
+                case "1": return PlatformType.GitHub;
+                case "2": return PlatformType.GitLab;
+                default:
+                    Console.WriteLine("Invalid selection. Please try again.");
+                    break;
+            }
+        }
+    }
+
+    public FrameworkType GetFrameworkType()
+    {
+        Console.WriteLine("Select Framework:");
+        Console.WriteLine("1. .NET");
+        Console.WriteLine("2. Dart");
+        Console.WriteLine("3. Python");
 
         while (true)
         {
@@ -18,9 +39,9 @@ public class ConsoleInputProvider : IInputProvider
             var key = Console.ReadLine();
             switch (key)
             {
-                case "1": return PlatformType.GitHub;
-                case "2": return PlatformType.GitLab;
-                case "3": return PlatformType.AzureDevOps;
+                case "1": return FrameworkType.DotNet;
+                case "2": return FrameworkType.Dart;
+                case "3": return FrameworkType.Python;
                 default:
                     Console.WriteLine("Invalid selection. Please try again.");
                     break;
@@ -34,9 +55,23 @@ public class ConsoleInputProvider : IInputProvider
         return Console.ReadLine() ?? "MyProject";
     }
 
+    public bool GetBuildApplication()
+    {
+        Console.Write("Include Build Application step? (y/n): ");
+        var key = Console.ReadLine();
+        return key?.ToLower() == "y";
+    }
+
     public bool GetBuildRelease()
     {
         Console.Write("Include Release Build step? (y/n): ");
+        var key = Console.ReadLine();
+        return key?.ToLower() == "y";
+    }
+
+    public bool GetStartDeploy()
+    {
+        Console.Write("Include Deploy (NuGet Push) step? (y/n): ");
         var key = Console.ReadLine();
         return key?.ToLower() == "y";
     }

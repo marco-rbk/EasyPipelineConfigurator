@@ -9,6 +9,7 @@ var serviceCollection = new ServiceCollection();
 
 // Register Services
 serviceCollection.AddTransient<IInputProvider, ConsoleInputProvider>();
+serviceCollection.AddTransient<ITemplateService, JsonTemplateService>();
 serviceCollection.AddTransient<IPipelineGenerator, GitHubPipelineGenerator>(); // Currently only supporting GitHub for simplicity of V1
 serviceCollection.AddTransient<IFileWriteService, LocalFileWriteService>();
 
@@ -25,7 +26,10 @@ var config = new PipelineConfig
 {
     ProjectName = input.GetProjectName(),
     TargetPlatform = input.GetPlatformType(),
+    Framework = input.GetFrameworkType(),
+    BuildApplication = input.GetBuildApplication(),
     BuildRelease = input.GetBuildRelease(),
+    StartDeploy = input.GetStartDeploy(),
     OutputDirectory = input.GetOutputDirectory()
 };
 

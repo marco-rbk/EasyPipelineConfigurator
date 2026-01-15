@@ -1,0 +1,10 @@
+{
+    "Steps": {
+        "Restore": "dart pub get",
+        "Build": "dart compile exe bin/main.dart -o bin/app",
+        "Test": "dart test",
+        "Release": "dart compile exe bin/main.dart -o build/app-release",
+        "Pack": "echo 'Dart packing not supported yet via generic template'",
+        "Push": "dart pub publish"
+    }
+}
