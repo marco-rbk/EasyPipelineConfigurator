@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="EasyPipelineConfigurator.Core/EasyPipelineConfigurator.Core.csproj" />
+  <Project Path="EasyPipelineConfigurator.Infrastructure/EasyPipelineConfigurator.Infrastructure.csproj" />
+  <Project Path="EasyPipelineConfigurator.Tests/EasyPipelineConfigurator.Tests.csproj" />
   <Project Path="EasyPipelineConfigurator/EasyPipelineConfigurator.csproj" />
 </Solution>
