@@ -5,20 +5,13 @@ using EasyPipelineConfigurator.Core.Enums;
 
 namespace EasyPipelineConfigurator.Infrastructure.Generators;
 
-public class GitHubPipelineGenerator : IPipelineGenerator
+public class GitHubPipelineGenerator(ITemplateService templateService) : IPipelineGenerator
 {
-    private readonly ITemplateService _templateService;
-
-    public GitHubPipelineGenerator(ITemplateService templateService)
-    {
-        _templateService = templateService;
-    }
-
     public PlatformType Type => PlatformType.GitHub;
 
     public string Generate(PipelineConfig config)
     {
-        var settings = _templateService.GetSettings(config.Framework);
+        var settings = templateService.GetSettings(config.Framework);
         var sb = new StringBuilder();
 
         GenerateHeader(sb, config);
