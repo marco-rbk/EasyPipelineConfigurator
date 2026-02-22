@@ -3,6 +3,10 @@ using EasyPipelineConfigurator.Core.Interfaces;
 
 namespace EasyPipelineConfigurator.Services;
 
+/// <summary>
+/// Provides console-based user input for pipeline configuration options.
+/// Implements <see cref="IInputProvider"/> to supply platform, framework and generation choices.
+/// </summary>
 public class ConsoleInputProvider : IInputProvider
 {
     public PlatformType GetPlatformType()
@@ -26,6 +30,10 @@ public class ConsoleInputProvider : IInputProvider
         }
     }
 
+    /// <summary>
+    /// Prompts the user to select a target framework type and returns the chosen value.
+    /// </summary>
+    /// <returns>The selected <see cref="FrameworkType"/>.</returns>
     public FrameworkType GetFrameworkType()
     {
         Console.WriteLine("Select Framework:");
@@ -49,12 +57,20 @@ public class ConsoleInputProvider : IInputProvider
         }
     }
 
+    /// <summary>
+    /// Prompts the user to enter a project name.
+    /// </summary>
+    /// <returns>The entered project name or a default if none provided.</returns>
     public string GetProjectName()
     {
         Console.Write("Enter Project Name: ");
         return Console.ReadLine() ?? "MyProject";
     }
 
+    /// <summary>
+    /// Asks whether to include build application steps in the generated pipeline.
+    /// </summary>
+    /// <returns>True if the build application step should be included; otherwise false.</returns>
     public bool GetBuildApplication()
     {
         Console.Write("Include Build Application step? (y/n): ");
@@ -62,6 +78,10 @@ public class ConsoleInputProvider : IInputProvider
         return key?.ToLower() == "y";
     }
 
+    /// <summary>
+    /// Asks whether to include a release build step in the generated pipeline.
+    /// </summary>
+    /// <returns>True if the release build step should be included; otherwise false.</returns>
     public bool GetBuildRelease()
     {
         Console.Write("Include Release Build step? (y/n): ");
@@ -69,6 +89,10 @@ public class ConsoleInputProvider : IInputProvider
         return key?.ToLower() == "y";
     }
 
+    /// <summary>
+    /// Asks whether to include deploy (NuGet push) steps in the generated pipeline.
+    /// </summary>
+    /// <returns>True if deploy steps should be included; otherwise false.</returns>
     public bool GetStartDeploy()
     {
         Console.Write("Include Deploy (NuGet Push) step? (y/n): ");
@@ -76,6 +100,10 @@ public class ConsoleInputProvider : IInputProvider
         return key?.ToLower() == "y";
     }
 
+    /// <summary>
+    /// Prompts the user for an output directory where the generated pipeline file will be saved.
+    /// </summary>
+    /// <returns>The output directory path or the current directory if none provided.</returns>
     public string GetOutputDirectory()
     {
         Console.Write("Enter Output Directory (default: current): ");

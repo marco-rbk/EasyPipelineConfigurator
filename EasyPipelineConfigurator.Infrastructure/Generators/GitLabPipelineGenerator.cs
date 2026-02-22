@@ -5,10 +5,17 @@ using EasyPipelineConfigurator.Core.Enums;
 
 namespace EasyPipelineConfigurator.Infrastructure.Generators;
 
+/// <summary>
+/// Generates GitLab CI YAML using framework-specific template settings.
+/// </summary>
 public class GitLabPipelineGenerator : IPipelineGenerator
 {
     private readonly ITemplateService _templateService;
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="GitLabPipelineGenerator"/>.
+    /// </summary>
+    /// <param name="templateService">Service used to obtain framework-specific settings.</param>
     public GitLabPipelineGenerator(ITemplateService templateService)
     {
         _templateService = templateService;
@@ -16,6 +23,11 @@ public class GitLabPipelineGenerator : IPipelineGenerator
 
     public PlatformType Type => PlatformType.GitLab;
 
+    /// <summary>
+    /// Generates the GitLab CI YAML content for the provided configuration.
+    /// </summary>
+    /// <param name="config">User supplied pipeline configuration.</param>
+    /// <returns>YAML content as string.</returns>
     public string Generate(PipelineConfig config)
     {
         var settings = _templateService.GetSettings(config.Framework);

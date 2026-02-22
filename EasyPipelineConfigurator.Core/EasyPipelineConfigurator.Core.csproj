@@ -1,4 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!--
+  Project: EasyPipelineConfigurator.Core
+  Purpose: Core domain models and interfaces used across the solution.
+  TargetFramework: net10.0
+  C# Version: 13.0
+-->
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>

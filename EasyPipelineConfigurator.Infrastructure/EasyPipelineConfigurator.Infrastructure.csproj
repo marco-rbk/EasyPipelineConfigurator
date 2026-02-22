@@ -1,4 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!--
+  Project: EasyPipelineConfigurator.Infrastructure
+  Purpose: Infrastructure implementations (generators, services) and JSON template files copied to output.
+  Templates are located under the Templates directory and are preserved to output directory.
+  TargetFramework: net10.0
+  C# Version: 13.0
+-->
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <None Update="Templates\*.json">
