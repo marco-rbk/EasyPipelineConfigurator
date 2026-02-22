@@ -6,9 +6,15 @@ using Moq;
 
 namespace EasyPipelineConfigurator.Tests;
 
+/// <summary>
+/// Unit tests for <see cref="GitHubPipelineGenerator"/>.
+/// </summary>
 public class GitHubPipelineGeneratorTests
 {
     [Fact]
+    /// <summary>
+    /// Verifies that generator produces expected YAML snippets when provided a valid configuration.
+    /// </summary>
     public void Generate_ShouldReturnValidYaml_WhenConfigIsProvided()
     {
         // Arrange
